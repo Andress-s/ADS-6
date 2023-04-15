@@ -1,6 +1,13 @@
 // Copyright 2022 NNTU-CS
 #ifndef INCLUDE_TPQUEUE_H_
 #define INCLUDE_TPQUEUE_H_
+#include <iostream>
+
+struct SYM {
+    char ch;
+    int prior;
+    SYM* next;
+};
 
 template<typename T, int size>
 class TPQueue {
@@ -13,20 +20,15 @@ public:
         while (head)
             pop();
     }
-
-    // добавление элемента в очередь с учетом приоритета
     void push(char ch, int prior) {
         SYM* temp = new SYM{ ch, prior, nullptr };
-
         if (!head) {
             head = temp;
             tail = temp;
-        }
-        else if (prior > head->prior) {
+        } else if (prior > head->prior) {
             temp->next = head;
             head = temp;
-        }
-        else {
+        } else {
             SYM* current = head;
             while (current->next && prior <= current->next->prior)
                 current = current->next;
@@ -34,23 +36,15 @@ public:
             current->next = temp;
         }
     }
-
-    // удаление элемента из очереди
     void pop() {
-        if (!head)
-            return;
-
+        if (!head) return;
         SYM* temp = head;
         head = head->next;
         delete temp;
     }
-
-    // проверка очереди на пустоту
     bool isEmpty() const {
         return head == nullptr;
     }
-
-    // вывод очереди на экран
     friend ostream& operator<<(ostream& os, const TPQueue& q) {
         SYM* current = q.head;
         while (current) {
@@ -59,12 +53,6 @@ public:
         }
         return os;
     }
-};
-
-struct SYM {
-    char ch;
-    int prior;
-    SYM* next;
 };
 
 #endif  // INCLUDE_TPQUEUE_H_
