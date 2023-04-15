@@ -2,6 +2,7 @@
 #ifndef INCLUDE_TPQUEUE_H_
 #define INCLUDE_TPQUEUE_H_
 #include <iostream>
+using namespace std;
 
 struct SYM {
     char ch;
