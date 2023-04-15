@@ -10,7 +10,7 @@ struct SYM {
     SYM* next;
 };
 
-template<typename T, int size>
+template <typename T, int size>
 class TPQueue {
   private:
     SYM* head;
