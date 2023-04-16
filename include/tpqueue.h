@@ -2,7 +2,7 @@
 #ifndef INCLUDE_TPQUEUE_H_
 #define INCLUDE_TPQUEUE_H_
 #include <iostream>
-using namespace std;
+#include <ostream>
 
 struct SYM {
     char ch;
@@ -10,9 +10,9 @@ struct SYM {
     SYM* next;
 };
 
-template <typename T, int size>
+template <class T, int size>
 class TPQueue {
-  private:
+private:
     SYM* head;
     SYM* tail;
 public:
@@ -21,32 +21,31 @@ public:
         while (head)
             pop();
     }
-    void push(char ch, int prior) {
-        SYM* temp = new SYM{ ch, prior, nullptr };
+    void push(SYM a) {
+        SYM* temp = new SYM{ a.ch, a.prior, nullptr };
         if (!head) {
             head = temp;
             tail = temp;
-        } else if (prior > head->prior) {
+        } else if (a.prior > head->prior) {
             temp->next = head;
             head = temp;
         } else {
             SYM* current = head;
-            while (current->next && prior <= current->next->prior)
+            while (current->next && a.prior <= current->next->prior)
                 current = current->next;
             temp->next = current->next;
             current->next = temp;
         }
     }
-    void pop() {
-        if (!head) return;
+    SYM pop() {
         SYM* temp = head;
         head = head->next;
-        delete temp;
+        return *temp;
     }
     bool isEmpty() const {
         return head == nullptr;
     }
-    friend ostream& operator<<(ostream& os, const TPQueue& q) {
+    friend std::ostream& operator<<(std::ostream& os, const TPQueue& q) {
         SYM* current = q.head;
         while (current) {
             os << '[' << current->ch << ':' << current->prior << ']';
