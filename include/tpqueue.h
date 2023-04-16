@@ -12,10 +12,11 @@ struct SYM {
 
 template <class T, int size>
 class TPQueue {
-private:
+ private:
     SYM* head;
     SYM* tail;
-public:
+ 
+ public:
     TPQueue() : head(nullptr), tail(nullptr) {}
     ~TPQueue() {
         while (head)
