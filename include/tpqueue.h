@@ -14,7 +14,7 @@ class TPQueue {
  private:
     SYM* head;
     SYM* tail;
- 
+
  public:
     TPQueue() : head(nullptr), tail(nullptr) {}
     ~TPQueue() {
