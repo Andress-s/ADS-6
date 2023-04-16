@@ -9,7 +9,6 @@ struct SYM {
     int prior;
     SYM* next;
 };
-
 template <class T, int size>
 class TPQueue {
  private:
